@@ -78,8 +78,8 @@ print("batch_size: ", args.batch_size)
 
 # create model and load pre_trained parameters
 model = GenerateModel()
-model = model.cuda()
-#model = torch.nn.DataParallel(model).cuda()
+#model = model.cuda()
+model = torch.nn.DataParallel(model).cuda()
 
 
 print("=> loading checkpoint '{}'".format(fn_model))
