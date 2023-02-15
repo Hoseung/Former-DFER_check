@@ -10,21 +10,19 @@ from time import time
 import torch
 import torch.nn as nn
 import torch.nn.parallel
-import torch.backends.cudnn as cudnn
+#import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
 import torch.utils.data.distributed
 from models.ST_Former import GenerateModel
-import numpy as np
+#import numpy as np
 import datetime
 from dataloader.dataset_NIA import custom_data_loader
 from runner_helper import *
 
 
-def validate(val_loader, model, criterion, args):
-    #losses = AverageMeter('Loss', ':.4f')
+def test(val_loader, model, criterion, args):
     top1 = AverageMeter('Accuracy(WAR)', ':6.2f')
-    #war = AverageMeter('WAR     ', ':6.3f') # war \\ top1 accuracy
     progress = ProgressMeter(len(val_loader),
                              [top1],
                              prefix='Test: ')
@@ -86,7 +84,7 @@ model = torch.nn.DataParallel(model).cuda()
 print("=> loading checkpoint '{}'".format(fn_model))
 checkpoint = torch.load(fn_model)
 model.load_state_dict(checkpoint['state_dict'])
-cudnn.benchmark = True
+#cudnn.benchmark = True
 
 
 # Data loading code
@@ -102,6 +100,6 @@ val_loader = torch.utils.data.DataLoader(test_data,
 start_time = time()
 # evaluate on validation set
 criterion = nn.CrossEntropyLoss().cuda()
-val_acc = validate(val_loader, model, criterion, args)
+val_acc = test(val_loader, model, criterion, args)
 
 print(f"Took {time() - start_time:.2f} seconds for validation")
