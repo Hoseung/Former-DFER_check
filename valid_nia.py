@@ -89,7 +89,7 @@ model.load_state_dict(checkpoint['state_dict'])
 
 
 # Data loading code
-test_data = custom_data_loader(project_path + "annotation/validation.txt")
+test_data = custom_data_loader(project_path + "annotation/test.txt")
 
 val_loader = torch.utils.data.DataLoader(test_data,
                                          batch_size=args.batch_size,
