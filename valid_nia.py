@@ -56,7 +56,7 @@ def test(val_loader, model, criterion, args):
 
 class Pseudoarg():
     def __init__(self):
-        self.workers = 1
+        self.workers = 0
         #self.epochs = 100
         #self.start_epoch = 0
         self.batch_size = 32
