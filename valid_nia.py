@@ -4,7 +4,7 @@
 import os
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 #from torchmetrics.functional.classification import multiclass_recall
 from time import time
 import torch
@@ -78,7 +78,8 @@ print("batch_size: ", args.batch_size)
 
 # create model and load pre_trained parameters
 model = GenerateModel()
-model = torch.nn.DataParallel(model).cuda()
+model = model.cuda()
+#model = torch.nn.DataParallel(model).cuda()
 
 
 print("=> loading checkpoint '{}'".format(fn_model))
