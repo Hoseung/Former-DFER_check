@@ -72,14 +72,15 @@ now = datetime.datetime.now()
 time_str = now.strftime("%m%d_%H%M%S_")
 print("NOW", time_str)
 project_path = './'
+os.mkdir("log/")
 log_txt_path = project_path + 'log/' + time_str + 'set' + str(args.data_set) + '-log.txt'
 
 print("batch_size: ", args.batch_size)
 
 # create model and load pre_trained parameters
 model = GenerateModel()
-#model = model.cuda()
-model = torch.nn.DataParallel(model).cuda()
+model = model.cuda()
+#model = torch.nn.DataParallel(model).cuda()
 
 
 print("=> loading checkpoint '{}'".format(fn_model))
